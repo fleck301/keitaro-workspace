@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Keitaro Workspace</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="/" class="brand"
+        ><span class="logo">K</span> Keitaro
+        <span class="muted">Workspace</span></a
+      ><span id="mode" class="badge">Подключение…</span>
+    </header>
+    <main>
+      <div class="heading">
+        <div>
+          <p class="eyebrow">КАМПАНИИ И ОФФЕРЫ</p>
+          <h1>Управление потоками</h1>
+          <p class="muted">
+            Подготовьте изменения. Проверьте веса. Отправьте в Keitaro.
+          </p>
+        </div>
+        <button id="open-create" class="primary" disabled>
+          ＋ Создать кампанию
+        </button>
+      </div>
+      <div id="notice" role="status" aria-live="polite" hidden></div>
+      <section class="toolbar" aria-label="Выбор кампании">
+        <div class="campaign-field">
+          <label for="campaign-search">Найти кампанию</label
+          ><input
+            id="campaign-search"
+            type="search"
+            placeholder="Название или ID"
+          />
+        </div>
+        <div class="campaign-select">
+          <label for="campaign">Кампания</label
+          ><select id="campaign">
+            <option>Загрузка…</option>
+          </select>
+        </div>
+        <button id="fetch" disabled>↓ Fetch streams</button>
+      </section>
+      <div id="campaign-meta" class="section-note"></div>
+      <section id="streams" aria-label="Потоки">
+        <div class="empty">Подключаемся к Keitaro…</div>
+      </section>
+      <footer>
+        Черновики и архив хранятся локально · В Keitaro меняются только офферы
+        выбранного потока
+        <a href="/docs" target="_blank" rel="noopener">API приложения ↗</a>
+      </footer>
+    </main>
+    <dialog id="create-dialog" aria-labelledby="create-title">
+      <form id="create-form">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">НОВАЯ КАМПАНИЯ</p>
+            <h2 id="create-title">Два потока. Один запуск.</h2>
+          </div>
+          <button
+            type="button"
+            id="close-create"
+            class="icon"
+            aria-label="Закрыть"
+          >
+            ×
+          </button>
+        </div>
+        <p class="muted">
+          Трафик выбранной страны → Google. Остальной → выбранный оффер.
+        </p>
+        <label for="name">Название</label
+        ><input id="name" name="name" required maxlength="150" />
+        <div class="form-grid">
+          <div>
+            <label for="country">Страна для Google</label
+            ><select id="country" name="country" required></select>
+          </div>
+          <div>
+            <label for="offer_id">Оффер для остального трафика</label
+            ><select id="offer_id" name="offer_id" required></select>
+          </div>
+        </div>
+        <label for="domain_id">Домен</label
+        ><select id="domain_id" name="domain_id" required></select>
+        <div class="form-grid">
+          <div>
+            <label for="group_id">Группа кампаний</label
+            ><select id="group_id" name="group_id" required></select>
+          </div>
+          <div>
+            <label for="traffic_source_id">Источник трафика</label
+            ><select
+              id="traffic_source_id"
+              name="traffic_source_id"
+              required
+            ></select>
+          </div>
+        </div>
+        <p id="create-error" class="error-text" role="alert"></p>
+        <div class="dialog-footer">
+          <span class="muted"
+            >Кампания включится после создания обоих потоков.</span
+          ><button type="submit" class="primary">Создать в Keitaro</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
